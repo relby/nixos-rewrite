@@ -12,8 +12,8 @@
       hostname = "nixos";
 
       modulesHyprland = {
-        nixos-modules = [ ./nixos-module.nix ];
-        home-module = import ./home-module.nix;
+        nixos-modules = [ ./hosts/laptop ];
+        home-module = import ./home-manager/linux/desktop-hyprland.nix;
       };
 
       lib = import ./lib;

@@ -29,7 +29,9 @@
 
   nix.settings.trusted-users = [ username ];
 
-  sudo.wheelNeedsPassword = false;
+  security = {
+    sudo.wheelNeedsPassword = false;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
