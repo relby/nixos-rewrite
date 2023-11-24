@@ -26,7 +26,7 @@
             nixpkgs = nixpkgs; # or nixpkgs-unstable
             system = "x86_64-linux";
             specialArgs = {
-              inherit username hostname;
+              inherit inputs username hostname;
               # use unstable branch for some packages to get the latest updates
               pkgs-unstable = import nixpkgs-unstable {
                 # TODO: move it to a variable
@@ -52,6 +52,11 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
+    wezterm-nightly = {
+      url = "github:happenslol/wezterm/add-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
 
     # Consider using it later
     # nixos-hardware.url = "github:nixos/nixos-hardware";

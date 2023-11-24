@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ inputs, pkgs, username, ... }: {
   imports = [
     ./hyprland
   ];
@@ -8,6 +8,7 @@
     homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
+      # TODO: Replace with `inputs.wezterm-nightly.packages.x86_64-linux.default` after switching to unstable
       wezterm
       alacritty
     ];
