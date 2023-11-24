@@ -6,7 +6,6 @@
   services = {
     pipewire = {
       enable = true;
-      package = pkgs-unstable.pipewire;
       alsa = {
         enable = true;
         support32Bit = true;
