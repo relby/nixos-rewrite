@@ -4,6 +4,7 @@
     , nixpkgs
     , nixpkgs-unstable
     , home-manager
+    , home-manager-unstable
     , ...
     }:
     let
@@ -22,7 +23,7 @@
       nixosConfigurations =
         let
           baseArgs = {
-            inherit home-manager;
+            home-manager = home-manager-unstable; # or home-manager for stable 23.05 version
             nixpkgs = nixpkgs-unstable; # or nixpkgs for stable 23.05 version
             system = "x86_64-linux";
             specialArgs = {
@@ -47,6 +48,10 @@
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
