@@ -23,7 +23,7 @@
         let
           baseArgs = {
             inherit home-manager;
-            nixpkgs = nixpkgs; # or nixpkgs-unstable
+            nixpkgs = nixpkgs-unstable; # or nixpkgs for stable 23.05 version
             system = "x86_64-linux";
             specialArgs = {
               inherit inputs username hostname;
