@@ -56,7 +56,7 @@
     wezterm-nightly = {
       url = "github:happenslol/wezterm/add-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
 
     # Consider using it later
     # nixos-hardware.url = "github:nixos/nixos-hardware";
