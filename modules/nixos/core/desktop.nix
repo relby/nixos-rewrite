@@ -29,7 +29,8 @@
       enable = true;
 
       desktopManager = {
-        xterm.enable = false;
+        # TODO: Remove after testing
+        xterm.enable = true;
       };
     };
   };
