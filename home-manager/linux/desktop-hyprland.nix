@@ -4,6 +4,7 @@
     ./shell
     ./git
     ./starship
+    ./neovim
     ./hyprland
   ];
 
@@ -17,6 +18,8 @@
       # wezterm
       alacritty
       cargo
+
+      google-chrome
     ];
 
     # This value determines the Home Manager release that your
