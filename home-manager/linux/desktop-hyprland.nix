@@ -9,8 +9,10 @@
 
     packages = with pkgs; [
       # TODO: Replace with `inputs.wezterm-nightly.packages.x86_64-linux.default` after switching to unstable
-      wezterm
+      inputs.wezterm-nightly.packages.x86_64-linux.default
+      # wezterm
       alacritty
+      cargo
     ];
 
     # This value determines the Home Manager release that your

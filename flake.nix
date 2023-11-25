@@ -59,7 +59,7 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     wezterm-nightly = {
-      url = "github:happenslol/wezterm/add-nix-flake";
+      url = "github:relby/wezterm/add-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

@@ -480,15 +480,15 @@
         "zlib": "zlib"
       },
       "locked": {
-        "lastModified": 1698415919,
-        "narHash": "sha256-Bi4nArx3vw4RTLi7pCvH7yuhMtF350utfDpC3G0xYAQ=",
-        "owner": "happenslol",
+        "lastModified": 1700870543,
+        "narHash": "sha256-lFH5J7dUfFzHPhH8uyE60uPeL6/2noQYBVuvjLOAN1s=",
+        "owner": "relby",
         "repo": "wezterm",
-        "rev": "b00321911281af5de6f6224e1b3096bbb58d3519",
+        "rev": "f9b4f99362b59d8fb00450161ed2fbbf73e4fbad",
         "type": "github"
       },
       "original": {
-        "owner": "happenslol",
+        "owner": "relby",
         "ref": "add-nix-flake",
         "repo": "wezterm",
         "type": "github"
