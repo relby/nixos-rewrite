@@ -30,7 +30,7 @@
     hyprland = {
       enable = true;
       xwayland.enable = true;
-      
+
       nvidiaPatches = true;
     };
   };
@@ -43,11 +43,10 @@
       swaylock # Screen locking
       wlogout # Logout menu
       wl-clipboard
-      mako # Notification daemon
       networkmanagerapplet # nm-connection-editor
     ];
     pathsToLink = [ "/libexec" ];
   };
 
-  security.pam.services.swaylock = {};
+  security.pam.services.swaylock = { };
 }

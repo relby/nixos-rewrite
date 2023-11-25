@@ -17,5 +17,5 @@ require('neo-tree').setup({
 })
 local opts = { silent = true }
 
-vim.keymap.set('n', '<C-n>', function() vim.cmd('NeoTreeFloatToggle') end, opts)
-vim.keymap.set('n', '<C-b>', function() vim.cmd('NeoTreeRevealToggle') end, opts)
+vim.keymap.set('n', '<C-n>', function() vim.cmd('Neotree filesystem toggle float') end, opts)
+vim.keymap.set('n', '<C-b>', function() vim.cmd('Neotree filesystem toggle right') end, opts)

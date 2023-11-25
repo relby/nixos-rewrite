@@ -5,6 +5,7 @@
     ./git
     ./starship
     ./neovim
+    ./gtk
     ./hyprland
   ];
 
@@ -17,9 +18,11 @@
       # inputs.wezterm-nightly.packages.x86_64-linux.default
       # wezterm
       alacritty
-      cargo
+      rustup
 
       google-chrome
+      nodejs_20
+      python311
     ];
 
     # This value determines the Home Manager release that your
@@ -31,6 +34,30 @@
     # the Home Manager release notes for a list of state version
     # changes in each release.
     stateVersion = "23.05";
+  };
+
+  programs = {
+    bat = {
+      enable = true;
+      config = {
+        theme = "Sublime Snazzy";
+      };
+    };
+    btop = {
+      enable = true;
+      settings = {
+        vim_keys = true;
+      };
+    };
+    eza = {
+      enable = true;
+      enableAliases = true;
+      extraOptions = [
+        "--group-directories-first"
+        "--header"
+      ];
+    };
+    zoxide.enable = true;
   };
 
   # Let Home Manager install and manage itself.
