@@ -1,5 +1,9 @@
 { inputs, pkgs, username, ... }: {
   imports = [
+    ./alacritty
+    ./shell
+    ./git
+    ./starship
     ./hyprland
   ];
 
@@ -8,8 +12,8 @@
     homeDirectory = "/home/${username}";
 
     packages = with pkgs; [
-      # TODO: Replace with `inputs.wezterm-nightly.packages.x86_64-linux.default` after switching to unstable
-      inputs.wezterm-nightly.packages.x86_64-linux.default
+      # TODO: `wezterm` doesn't work for now for some reason. Switch to it from alacritty after the problem goes away
+      # inputs.wezterm-nightly.packages.x86_64-linux.default
       # wezterm
       alacritty
       cargo

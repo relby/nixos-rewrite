@@ -64,11 +64,12 @@
     };
     shells = with pkgs; [
       bash
-      zsh
+      nushell
     ];
   };
 
-  users.defaultUserShell = pkgs.zsh;
+  # TODO: Consider moving to `nushell`
+  users.defaultUserShell = pkgs.bash;
 
   virtualisation.docker.enable = true;
 }
