@@ -14,6 +14,7 @@
     in with pkgs.vimPlugins; [
       # Colorschemas
       tokyonight-nvim
+      catppuccin-nvim
       # Development
       neo-tree-nvim
       (nvim-treesitter.withPlugins

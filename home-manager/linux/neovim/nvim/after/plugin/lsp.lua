@@ -1,25 +1,25 @@
-require('mason').setup({
-    ui = {
-        border = 'single',
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗"
-        }
-    },
-})
-local mason_lspconfig = require('mason-lspconfig')
-
-mason_lspconfig.setup({
-    ensure_installed = {
-        'lua_ls',
-        'rust_analyzer',
-        'clangd',
-        'pyright',
-        'tsserver',
-        'rnix'
-    },
-})
+-- require('mason').setup({
+--     ui = {
+--         border = 'single',
+--         icons = {
+--             package_installed = "✓",
+--             package_pending = "➜",
+--             package_uninstalled = "✗"
+--         }
+--     },
+-- })
+-- local mason_lspconfig = require('mason-lspconfig')
+--
+-- mason_lspconfig.setup({
+--     ensure_installed = {
+--         'lua_ls',
+--         'rust_analyzer',
+--         'clangd',
+--         'pyright',
+--         'tsserver',
+--         'rnix'
+--     },
+-- })
 
 local on_attach = function(client, buffer)
     local opts = { buffer = buffer, remap = false }
@@ -38,74 +38,110 @@ local on_attach = function(client, buffer)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 end
 
-mason_lspconfig.setup_handlers({
-    -- Default configurations for all installed servers
-    function(server_name)
-        require('lspconfig')[server_name].setup({
-            on_attach = on_attach
-        })
-    end,
-    -- Configurations for specific servers
-    ['lua_ls'] = function()
-        require('lspconfig')['lua_ls'].setup({
-            on_attach = on_attach,
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        enable = true,
-                        globals = { 'vim' }
-                    },
-                },
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+require('lspconfig')['lua_ls'].setup({
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            diagnostics = {
+                enable = true,
+                globals = { 'vim' }
             },
-        })
-    end,
-    ['rust_analyzer'] = function()
-        require("rust-tools").setup({
-            server = {
-                on_attach = on_attach,
-            },
-        })
-    end,
-    ['clangd'] = function()
-        require('lspconfig')['clangd'].setup({
-            on_attach = on_attach,
-            init_options = {
-                fallbackFlags = {
-                    '-std=c++17',
-                    '-pedantic',
-                    '-Wall',
-                    '-Wextra',
-                    '-Wswitch-enum',
-                },
-            },
-        })
-    end,
-    ['pyright'] = function()
-        -- Set virtual environment inside poetry project
-        local path = require('lspconfig.util').path
-        local venvPath
-        vim.fn.jobstart(
-            'poetry env info --path',
-            {
-                cwd = vim.fn.getcwd(),
-                stdout_buffered = true,
-                on_exit = function(_, exit_code)
-                    if exit_code == 0 then
-                        vim.env.VIRTUAL_ENV = venvPath
-                        vim.env.PATH = path.join(vim.env.VIRTUAL_ENV, 'bin:') .. vim.env.PATH
-                    end
-                end,
-                on_stdout = function(_, data)
-                    venvPath = data[1]
-                end,
-            }
-        )
-        -- Pyright settings
-        require('lspconfig')['pyright'].setup({
-            on_attach = on_attach,
-        })
-    end
+        },
+    },
 })
+
+require('lspconfig')['clangd'].setup({
+    on_attach = on_attach,
+    init_options = {
+        fallbackFlags = {
+            '-std=c++17',
+            '-pedantic',
+            '-Wall',
+            '-Wextra',
+            '-Wswitch-enum',
+        },
+    },
+})
+require('lspconfig')['tsserver'].setup({})
+require('lspconfig')['rnix'].setup({})
+
+
+require("rust-tools").setup({
+    server = {
+        on_attach = on_attach,
+    },
+})
+
+-- mason_lspconfig.setup_handlers({ -- Default configurations for all installed servers
+--     function(server_name)
+--         require('lspconfig')[server_name].setup({
+--             on_attach = on_attach
+--         })
+--     end,
+--     -- Configurations for specific servers
+--     ['lua_ls'] = function()
+--         require('lspconfig')['lua_ls'].setup({
+--             on_attach = on_attach,
+--             settings = {
+--                 Lua = {
+--                     diagnostics = {
+--                         enable = true,
+--                         globals = { 'vim' }
+--                     },
+--                 },
+--             },
+--         })
+--     end,
+--     ['rust_analyzer'] = function()
+--         require("rust-tools").setup({
+--             server = {
+--                 on_attach = on_attach,
+--             },
+--         })
+--     end,
+--     ['clangd'] = function()
+--         require('lspconfig')['clangd'].setup({
+--             on_attach = on_attach,
+--             init_options = {
+--                 fallbackFlags = {
+--                     '-std=c++17',
+--                     '-pedantic',
+--                     '-Wall',
+--                     '-Wextra',
+--                     '-Wswitch-enum',
+--                 },
+--             },
+--         })
+--     end,
+--     ['pyright'] = function()
+--         -- Set virtual environment inside poetry project
+--         local path = require('lspconfig.util').path
+--         local venvPath
+--         vim.fn.jobstart(
+--             'poetry env info --path',
+--             {
+--                 cwd = vim.fn.getcwd(),
+--                 stdout_buffered = true,
+--                 on_exit = function(_, exit_code)
+--                     if exit_code == 0 then
+--                         vim.env.VIRTUAL_ENV = venvPath
+--                         vim.env.PATH = path.join(vim.env.VIRTUAL_ENV, 'bin:') .. vim.env.PATH
+--                     end
+--                 end,
+--                 on_stdout = function(_, data)
+--                     venvPath = data[1]
+--                 end,
+--             }
+--         )
+--         -- Pyright settings
+--         require('lspconfig')['pyright'].setup({
+--             on_attach = on_attach,
+--         })
+--     end
+-- })
 
 --[[ UI Settings ]]
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
