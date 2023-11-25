@@ -70,22 +70,22 @@
       bindm = $mod, mouse:272, movewindow
       bindm = $mod, mouse:273, resizewindow
 
-      bindle = , XF86MonBrightnessUp,   exec, light -A 10
-      bindle = , XF86MonBrightnessDown, exec, light -U 10
+      bindle = , XF86MonBrightnessUp,   exec, ${pkgs.light}/bin/light -A 10
+      bindle = , XF86MonBrightnessDown, exec, ${pkgs.light}/bin/light -U 10
       bindle = , XF86AudioRaiseVolume,  exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%
       bindle = , XF86AudioLowerVolume,  exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%
       bind   = , XF86AudioMute,         exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
       bind   = , XF86AudioMicMute,      exec, ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-      bind = $mod, P, exec, wofi --show drun
+      bind = $mod, P, exec, ${pkgs.wofi}/bin/wofi --show drun
 
-      bind = $mod, I, exec, swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-dark.png
-      bind = $mod, O, exec, swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-light.png
+      bind = $mod, I, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-dark.png
+      bind = $mod, O, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-light.png
 
-      bind = ALT CTRL, H, exec, wtype -m alt -m ctrl -P Left
-      bind = ALT CTRL, J, exec, wtype -m alt -m ctrl -P Down
-      bind = ALT CTRL, K, exec, wtype -m alt -m ctrl -P Up
-      bind = ALT CTRL, L, exec, wtype -m alt -m ctrl -P Right
+      bind = ALT CTRL, H, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Left
+      bind = ALT CTRL, J, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Down
+      bind = ALT CTRL, K, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Up
+      bind = ALT CTRL, L, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Right
 
       general {
           gaps_in = 3
@@ -133,8 +133,8 @@
       }
 
       # autostart
-      exec-once = swww init
-      exec-once = waybar &
+      exec-once = ${pkgs.swww}/bin/swww init
+      exec-once = ${pkgs.waybar}/bin/waybar &
     '';
   };
 
