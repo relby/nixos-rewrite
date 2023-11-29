@@ -1,5 +1,11 @@
-{ pkgs, username, ... }: {
+{ inputs, pkgs, username, ... }: {
   imports = [
+    inputs.nixos-hardware.nixosModules.common-pc-laptop
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-acpi_call
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
+
     ./hardware-configuration.nix
 
     ../../modules/nixos/core/desktop.nix

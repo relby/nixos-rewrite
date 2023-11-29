@@ -54,6 +54,7 @@
 
   environment = {
     systemPackages = with pkgs; [
+      gcc
       git
       wget
       curl

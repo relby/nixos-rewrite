@@ -1,12 +1,6 @@
 {
   outputs =
-    inputs @ { self
-    , nixpkgs
-    , nixpkgs-unstable
-    , home-manager
-    , home-manager-unstable
-    , ...
-    }:
+    inputs @ { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixpkgs-wayland, ... }:
     let
       username = "relby";
       # Consider changing it later
@@ -22,21 +16,23 @@
     {
       nixosConfigurations =
         let
-          baseArgs = {
-            home-manager = home-manager-unstable; # or home-manager for stable 23.05 version
-            nixpkgs = nixpkgs-unstable; # or nixpkgs for stable 23.05 version
-            system = "x86_64-linux";
-            specialArgs = {
-              inherit inputs username hostname;
-              # use unstable branch for some packages to get the latest updates
-              pkgs-unstable = import nixpkgs-unstable {
-                # TODO: move it to a variable
-                system = "x86_64-linux";
-                # To use chrome, we need to allow the installation of non-free software
-                config.allowUnfree = true;
-              };
-            } // inputs;
-          };
+          baseArgs = let system = "x86_64-linux"; in
+            {
+              inherit system;
+              home-manager = home-manager-unstable; # or home-manager for stable 23.05 version
+              nixpkgs = nixpkgs-unstable; # or nixpkgs for stable 23.05 version
+              # TODO: add overlays after this `https://github.com/nix-community/nixpkgs-wayland/pull/431` PR is merged
+              overlays = [ /* nixpkgs-wayland.overlay */ ];
+              specialArgs = {
+                inherit inputs username hostname;
+                # use unstable branch for some packages to get the latest updates
+                pkgs-unstable = import nixpkgs-unstable {
+                  inherit system;
+                  # To use chrome, we need to allow the installation of non-free software
+                  config.allowUnfree = true;
+                };
+              } // inputs;
+            };
         in
         {
           ${hostname} = lib.mkNixOS (modulesHyprland // baseArgs);
@@ -63,7 +59,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Consider using it later
-    # nixos-hardware.url = "github:nixos/nixos-hardware";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:nixos/nixos-hardware";
   };
 }

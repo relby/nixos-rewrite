@@ -43,6 +43,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 require('lspconfig')['lua_ls'].setup({
     on_attach = on_attach,
+    capabilities = capabilities,
     settings = {
         Lua = {
             diagnostics = {
@@ -55,6 +56,7 @@ require('lspconfig')['lua_ls'].setup({
 
 require('lspconfig')['clangd'].setup({
     on_attach = on_attach,
+    capabilities = capabilities,
     init_options = {
         fallbackFlags = {
             '-std=c++17',
@@ -65,8 +67,14 @@ require('lspconfig')['clangd'].setup({
         },
     },
 })
-require('lspconfig')['tsserver'].setup({})
-require('lspconfig')['rnix'].setup({})
+require('lspconfig')['tsserver'].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+require('lspconfig')['rnix'].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
 
 
 require("rust-tools").setup({

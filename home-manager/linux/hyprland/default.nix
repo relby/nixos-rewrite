@@ -1,4 +1,4 @@
-{ pkgs, hyprland, ... }: {
+{ inputs, pkgs, hyprland, ... }: {
   imports = [
     hyprland.homeManagerModules.default
   ];
@@ -17,10 +17,9 @@
     "WLR_EGL_NO_MODIFIRES" = "1";
   };
 
-
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
+    # enableNvidiaPatches = true;
     extraConfig = ''
       monitor = eDP-1, 1920x1080, 0x0, 1
 
@@ -81,29 +80,33 @@
 
       bind = $mod, I, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-dark.png
       bind = $mod, O, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-light.png
+      bind = $mod, Y, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/wave.jpg
 
       bind = ALT CTRL, H, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Left
       bind = ALT CTRL, J, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Down
       bind = ALT CTRL, K, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Up
       bind = ALT CTRL, L, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Right
 
+      bind = , Print, exec, ${pkgs.grim}/bin/grim - | ${pkgs.wl-clipboard}/bin/wl-copy
+      bind = $mod SHIFT, S, exec, ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp -b 1B1F28CC -s C778DD0D -w 0)" - | ${pkgs.wl-clipboard}/bin/wl-copy
+
       general {
           gaps_in = 3
           gaps_out = 2
           border_size = 2
-          col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-          col.inactive_border = rgba(595959aa)
+          col.active_border = rgb(e6c384)
+          col.inactive_border = rgb(1a1b26)
       }
 
       decoration {
-          rounding = 5
+          rounding = 0
           blur {
               enabled = yes
               size = 3
               passes = 1
               new_optimizations = on
           }
-          drop_shadow = no
+          drop_shadow = yes
       }
 
       animations {
@@ -132,9 +135,16 @@
         workspace_swipe = true
       }
 
+      misc {
+        disable_hyprland_logo = true
+        mouse_move_enables_dpms = true
+        key_press_enables_dpms = true
+      }
+
       # autostart
       exec-once = ${pkgs.swww}/bin/swww init
       exec-once = ${pkgs.waybar}/bin/waybar &
+      exec-once = ${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaylock --daemonize --screenshots --effect-blur 10x5 --grace 5 --fade-in 5' timeout 600 'hyprctl dispatch dpms off' before-sleep 'swaylock --daemonize --screenshots --effect-blur 10x5' &
     '';
   };
 
@@ -447,9 +457,30 @@
         }
       '';
     };
+    swaylock = {
+      enable = true;
+      package = pkgs.swaylock-effects;
+      settings = {};
+    };
   };
 
   services = {
-    mako.enable = true;
+    mako = {
+      enable = true;
+      anchor = "top-right";
+      backgroundColor = "#1e1e2e";
+      borderColor = "#313244";
+      borderRadius = 10;
+      borderSize = 2;
+      defaultTimeout = 5000;
+      font = "JetBrains Mono 10";
+      height = 100;
+      layer = "overlay";
+      margin = "10";
+      padding = "15";
+      progressColor = "#89b4fa";
+      textColor = "#d9e0ee";
+      width = 300;
+    };
   };
 }

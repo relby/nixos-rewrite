@@ -50,9 +50,10 @@
   };
 
   fonts = {
-    enableDefaultFonts = false;
+    # TODO: Maybe set this to false in future
+    enableDefaultPackages = true;
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override {
         fonts = [
           "JetBrainsMono"

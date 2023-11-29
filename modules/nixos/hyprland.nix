@@ -4,6 +4,8 @@
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
+      # TODO: Try to use it
+      # xdg-desktop-portal-hyprland
     ];
   };
 
@@ -31,8 +33,9 @@
       enable = true;
       xwayland.enable = true;
 
-      nvidiaPatches = true;
+      enableNvidiaPatches = true;
     };
+    light.enable = true;
   };
 
   environment = {
@@ -48,5 +51,7 @@
     pathsToLink = [ "/libexec" ];
   };
 
-  security.pam.services.swaylock = { };
+  security.pam.services = {
+    swaylock = { };
+  };
 }

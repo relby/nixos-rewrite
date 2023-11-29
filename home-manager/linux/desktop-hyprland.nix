@@ -6,6 +6,7 @@
     ./starship
     ./neovim
     ./gtk
+    ./eww
     ./hyprland
   ];
 
@@ -23,6 +24,13 @@
       google-chrome
       nodejs_20
       python311
+      jq
+
+      feh
+      imv
+      libnotify
+      grim
+      slurp
     ];
 
     # This value determines the Home Manager release that your
@@ -58,6 +66,10 @@
       ];
     };
     zoxide.enable = true;
+
+    nix-index = {
+      enable = true;
+    };
   };
 
   # Let Home Manager install and manage itself.

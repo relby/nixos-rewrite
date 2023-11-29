@@ -1,6 +1,7 @@
 { pkgs, pkgs-unstable, ... }: {
   environment.systemPackages = with pkgs; [
     pulseaudio
+    playerctl
   ];
 
   services = {
