@@ -29,9 +29,9 @@
       enable = true;
 
       desktopManager = {
-        # TODO: Remove after testing
-        xterm.enable = true;
+        xterm.enable = false;
       };
+      excludePackages = with pkgs; [ xterm ];
     };
   };
 
