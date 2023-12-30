@@ -10,13 +10,11 @@ require('lualine').setup({
 
 -- TODO: maybe move it to separate file
 require("fidget").setup({
-    text = {
-        spinner = "moon",
-    },
-    align = {
-        bottom = true,
-    },
-    window = {
-        relative = "editor",
+    progress = {
+        display = {
+            progress_icon = {
+                pattern = "moon"
+            },
+        }
     },
 })

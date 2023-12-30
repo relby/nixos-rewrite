@@ -144,7 +144,7 @@
       # autostart
       exec-once = ${pkgs.swww}/bin/swww init
       exec-once = ${pkgs.waybar}/bin/waybar &
-      exec-once = ${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaylock --daemonize --screenshots --effect-blur 10x5 --grace 5 --fade-in 5' timeout 600 'hyprctl dispatch dpms off' before-sleep 'swaylock --daemonize --screenshots --effect-blur 10x5' &
+      exec-once = ${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaylock --daemonize --screenshots --effect-blur 10x5 --grace 5 --fade-in 5' timeout 600 'hyprctl dispatch dpms off' resume 'hyprctl dispatch dpms on' before-sleep 'swaylock --daemonize --screenshots --effect-blur 10x5' &
     '';
   };
 

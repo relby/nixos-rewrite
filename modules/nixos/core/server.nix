@@ -59,6 +59,8 @@
       wget
       curl
       neovim
+      zip
+      unzip
     ];
     variables = {
       EDITOR = "nvim";

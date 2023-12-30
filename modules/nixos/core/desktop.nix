@@ -14,6 +14,9 @@
     };
   };
 
+  # TODO: set to true and configure
+  networking.firewall.enable = false;
+
   programs = {
     dconf.enable = true;
   };

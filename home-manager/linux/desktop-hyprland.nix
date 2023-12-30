@@ -31,6 +31,9 @@
       libnotify
       grim
       slurp
+
+      nodePackages."@nestjs/cli"
+      nodePackages."pnpm"
     ];
 
     # This value determines the Home Manager release that your
