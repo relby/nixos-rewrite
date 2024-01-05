@@ -4,7 +4,7 @@ bootstrap destination username publickey:
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=no \
     {{destination}} " \
-        parted /dev/nvme0n1 -- mklabel gpt; \
+        yes | parted /dev/nvme0n1 -- mklabel gpt; \
         parted /dev/nvme0n1 -- mkpart root ext4 512MB -8GB; \
         parted /dev/nvme0n1 -- mkpart swap linux-swap -8GB 100\%; \
         parted /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB; \
