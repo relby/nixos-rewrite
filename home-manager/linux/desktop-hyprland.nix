@@ -8,6 +8,7 @@
     ./gtk
     ./eww
     ./hyprland
+    ./hyprshade
   ];
 
   home = {

@@ -21,7 +21,7 @@
               inherit system;
               home-manager = home-manager-unstable; # or home-manager for stable 23.05 version
               nixpkgs = nixpkgs-unstable; # or nixpkgs for stable 23.05 version
-              # TODO: add overlays after this `https://github.com/nix-community/nixpkgs-wayland/pull/431` PR is merged
+              # NOTE: Don't think I need to use nixpkgs-wayland overlays right now
               overlays = [ /* nixpkgs-wayland.overlay */ ];
               specialArgs = {
                 inherit inputs username hostname;

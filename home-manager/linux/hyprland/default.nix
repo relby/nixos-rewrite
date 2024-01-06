@@ -80,7 +80,8 @@
 
       bind = $mod, I, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-dark.png
       bind = $mod, O, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/dj-light.png
-      bind = $mod, Y, exec, ${pkgs.swww}/bin/swww img --transition-type any --transition-fps 60 ~/wallpapers/wave.jpg
+
+      bind = $mod, Y, exec, ${pkgs.hyprshade}/bin/hyprshade toggle grayscale
 
       bind = ALT CTRL, H, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Left
       bind = ALT CTRL, J, exec, ${pkgs.wtype}/bin/wtype -m alt -m ctrl -P Down
