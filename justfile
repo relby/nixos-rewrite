@@ -34,21 +34,17 @@ bootstrap destination username publickey:
         nixos-install --no-root-passwd; \
         reboot;"
 
-# WARNING: This wipes ALL data
-partition-and-mount:
+# WARNING: Wipes ALL data
+partition-and-mount: && partition (sleep "1.01") make-fs (sleep "1.02") mount
     #!/bin/sh
-    set -euxo pipefail
-    read -p "This is going to wipe all data on the disk and partition it. Do you wish to continue? [y/N]: " -n 1 -r
+    set -euo pipefail
+    read -p "This is going to wipe all data on the disk and partition it. Do you want to continue? [y/N]: " -n 1 -r
     echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
-    then
-        just partition
-        sleep 1
-        just make-fs
-        sleep 1
-        mount
-    fi
+    [[ $REPLY =~ ^[Yy]$ ]] || exit
 
+[private]
+@sleep seconds:
+    sleep {{seconds}}
 
 [private]
 partition:
