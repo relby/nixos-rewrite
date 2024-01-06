@@ -4,11 +4,11 @@ bootstrap destination username publickey:
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=no \
     {{destination}} " \
-        yes | parted /dev/nvme0n1 -- mklabel gpt; \
-        parted /dev/nvme0n1 -- mkpart root ext4 512MB -8GB; \
-        parted /dev/nvme0n1 -- mkpart swap linux-swap -8GB 100\%; \
-        parted /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB; \
-        parted /dev/nvme0n1 -- set 3 esp on; \
+        parted --script /dev/nvme0n1 -- mklabel gpt; \
+        parted --script /dev/nvme0n1 -- mkpart root ext4 512MB -8GB; \
+        parted --script /dev/nvme0n1 -- mkpart swap linux-swap -8GB 100\%; \
+        parted --script /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB; \
+        parted --script /dev/nvme0n1 -- set 3 esp on; \
         sleep 1; \
         mkfs.ext4 -L nixos /dev/nvme0n1p1; \
         mkswap -L swap /dev/nvme0n1p2; \
@@ -48,11 +48,11 @@ partition-and-mount: && partition (sleep "1.01") make-fs (sleep "1.02") mount
 
 [private]
 partition:
-    yes | parted /dev/nvme0n1 -- mklabel gpt
-    parted /dev/nvme0n1 -- mkpart root ext4 512MB -8GB
-    parted /dev/nvme0n1 -- mkpart swap linux-swap -8GB 100\%
-    parted /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB
-    parted /dev/nvme0n1 -- set 3 esp on
+    parted --script /dev/nvme0n1 -- mklabel gpt
+    parted --script /dev/nvme0n1 -- mkpart root ext4 512MB -8GB
+    parted --script /dev/nvme0n1 -- mkpart swap linux-swap -8GB 100\%
+    parted --script /dev/nvme0n1 -- mkpart ESP fat32 1MB 512MB
+    parted --script /dev/nvme0n1 -- set 3 esp on
 
 [private]
 make-fs:
