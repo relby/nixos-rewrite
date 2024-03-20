@@ -76,6 +76,7 @@
       pyright
       nodePackages.typescript-language-server
       rust-analyzer
+      gopls
     ];
   };
 

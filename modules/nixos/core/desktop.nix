@@ -22,7 +22,16 @@
   };
 
   services = {
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = [ pkgs.gutenprint ];
+    };
+
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
 
     # TODO: Research on gvfs and tumbler
     gvfs.enable = true;

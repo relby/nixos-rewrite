@@ -32,6 +32,12 @@
       libnotify
       grim
       slurp
+      go
+      lazygit
+
+      dotnet-sdk_8
+      vscode-fhs
+      sqlc
 
       nodePackages."@nestjs/cli"
       nodePackages."pnpm"
